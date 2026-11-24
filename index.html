@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MONTADO · Do pasto ao prato</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--espresso:#201E18;--tinta:#36352E;--creme:#FAF8EC;--verde:#63623F;--cortica:#B07A52;--pedra:#A89C86;
+    --serif:'Cormorant Garamond',Georgia,serif;--sans:'Poppins',system-ui,sans-serif;}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);background:var(--creme);color:var(--espresso);-webkit-font-smoothing:antialiased;line-height:1.65;overflow-x:hidden}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px}
+  .label{font-weight:500;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--cortica)}
+  h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:.01em;line-height:1.08}
+  .rv{opacity:0;transform:translateY(22px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+  .rv.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){.rv{transition:none}}
+  nav{position:sticky;top:0;z-index:50;background:rgba(250,248,236,.86);backdrop-filter:blur(10px);border-bottom:1px solid rgba(32,30,24,.08)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:74px}
+  .brandmark{display:flex;align-items:center;gap:11px}
+  .brandmark img{height:30px;width:auto;display:block}
+  .brandmark .w{font-family:var(--serif);font-size:23px;letter-spacing:.34em;font-weight:500;padding-left:.1em}
+  .navlinks{display:flex;gap:38px;align-items:center}
+  .navlinks a{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--tinta);text-decoration:none;opacity:.78;transition:opacity .3s}
+  .navlinks a:hover{opacity:1}
+  .btn{display:inline-block;font-size:12px;letter-spacing:.16em;text-transform:uppercase;padding:13px 26px;border-radius:2px;text-decoration:none;background:var(--espresso);color:var(--creme);border:1px solid var(--espresso);transition:background .35s,color .35s}
+  .btn:hover{background:transparent;color:var(--espresso)}
+  .btn.ghost{background:transparent;color:var(--espresso)}
+  .btn.ghost:hover{background:var(--espresso);color:var(--creme)}
+  .btn.cream{background:var(--creme);color:var(--espresso);border-color:var(--creme)}
+  .btn.cream:hover{background:transparent;color:var(--creme)}
+  @media(max-width:820px){.navlinks .lk{display:none}}
+  .hero{position:relative;padding:92px 0 60px;text-align:center}
+  .hero .logo{width:min(340px,70vw);height:auto;margin:0 auto 10px;display:block}
+  .hero .lead{max-width:600px;margin:22px auto 0;font-size:18px;color:var(--tinta);font-weight:300;line-height:1.85}
+  .hero h1{font-size:clamp(40px,7vw,76px);margin-top:8px}
+  .hero h1 em{font-style:italic;color:var(--cortica)}
+  .hero .ctas{margin-top:38px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+  .scroll-cue{margin-top:60px;font-size:11px;letter-spacing:.3em;color:var(--pedra);text-transform:uppercase}
+  .scroll-cue span{display:block;width:1px;height:46px;background:var(--pedra);margin:14px auto 0;opacity:.5;animation:cue 2.4s ease-in-out infinite}
+  @keyframes cue{0%,100%{transform:scaleY(.4);transform-origin:top;opacity:.2}50%{transform:scaleY(1);opacity:.6}}
+  .pills{display:flex;gap:48px;justify-content:center;flex-wrap:wrap;border-top:1px solid rgba(32,30,24,.1);border-bottom:1px solid rgba(32,30,24,.1);padding:30px 0}
+  .pill{text-align:center}
+  .pill b{font-family:var(--serif);font-size:30px;font-weight:500;display:block;line-height:1}
+  .pill small{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--verde)}
+  .diag{background:var(--espresso);color:var(--creme);padding:108px 0}
+  .diag .head{text-align:center;max-width:660px;margin:0 auto 52px}
+  .diag h2{font-size:clamp(32px,4.5vw,52px);color:var(--creme)}
+  .diag .head p{margin-top:18px;color:var(--pedra);font-weight:300;font-size:16px;line-height:1.9}
+  .diag .label{color:var(--cortica)}
+  .poster{background:var(--creme);border-radius:6px;padding:22px;box-shadow:0 40px 90px -40px rgba(0,0,0,.6);max-width:860px;margin:0 auto}
+  .poster figure{position:relative;line-height:0;margin:0}
+  .poster figure img{width:100%;height:auto;display:block;border-radius:3px}
+  .poster figure svg.ov{position:absolute;inset:0;width:100%;height:100%}
+  .cut{fill:var(--cortica);fill-opacity:0;stroke:var(--creme);stroke-width:0;stroke-opacity:0;pointer-events:all;cursor:pointer;mix-blend-mode:hard-light;transition:fill-opacity .22s,stroke-width .22s,stroke-opacity .22s}
+  .cut:hover{fill-opacity:.78;stroke-width:1.4;stroke-opacity:.9}
+  .diagcap{margin:34px auto 0;display:flex;align-items:center;justify-content:center;gap:16px;min-height:52px}
+  .diagcap .dot{width:9px;height:9px;border:1px solid var(--cortica);transform:rotate(45deg);transition:background .2s;flex:none}
+  .diagcap.on .dot{background:var(--cortica)}
+  .diagcap .nm{font-family:var(--serif);font-size:30px;font-weight:500;line-height:1;color:var(--creme)}
+  .diagcap .sb{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--cortica);margin-top:5px;display:block}
+  .diagcap .idle{font-family:var(--serif);font-style:italic;font-size:21px;color:var(--pedra)}
+  .diaghint{text-align:center;margin-top:6px;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--pedra);opacity:.7}
+  .formatos{padding:108px 0}
+  .sec-head{text-align:center;max-width:640px;margin:0 auto 58px}
+  .sec-head h2{font-size:clamp(32px,4.5vw,52px);margin-top:14px}
+  .sec-head p{margin-top:18px;color:var(--tinta);font-weight:300;font-size:16px;line-height:1.9}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  @media(max-width:860px){.cards{grid-template-columns:1fr;max-width:440px;margin:0 auto}}
+  .card{border:1px solid rgba(32,30,24,.14);border-radius:5px;padding:38px 32px 34px;background:#fff;position:relative;transition:transform .5s cubic-bezier(.16,1,.3,1),box-shadow .5s,border-color .5s;overflow:hidden}
+  .card::after{content:"";position:absolute;left:0;top:0;height:3px;width:100%;background:var(--cortica);transform:scaleX(0);transform-origin:left;transition:transform .5s}
+  .card:hover{transform:translateY(-8px);box-shadow:0 30px 60px -34px rgba(32,30,24,.4);border-color:transparent}
+  .card:hover::after{transform:scaleX(1)}
+  .card.feat{background:var(--espresso);color:var(--creme);border-color:var(--espresso)}
+  .card.feat .frac,.card.feat h3{color:var(--creme)}
+  .card.feat .meta b{color:var(--creme)}.card.feat .meta span{color:var(--pedra)}.card.feat .desc{color:var(--pedra)}
+  .card .tag{position:absolute;top:20px;right:22px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--cortica)}
+  .card .frac{font-family:var(--serif);font-size:64px;line-height:.9;font-weight:500}
+  .card h3{font-size:25px;margin:6px 0 2px}
+  .card .desc{font-size:13.5px;color:var(--tinta);font-weight:300;min-height:62px;margin-top:8px}
+  .card .meta{margin-top:22px;border-top:1px solid rgba(168,156,134,.3);padding-top:18px}
+  .card .meta .row{display:flex;justify-content:space-between;align-items:baseline;padding:6px 0}
+  .card .meta span{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--verde)}
+  .card .meta b{font-family:var(--serif);font-size:21px;font-weight:500}
+  .card .price{margin-top:18px;font-family:var(--serif);font-size:15px;color:var(--cortica);font-style:italic}
+  .formatos .foot{text-align:center;margin-top:34px;font-size:12.5px;color:var(--pedra);font-weight:300}
+  .como{background:#F3F0E0;padding:104px 0}
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;margin-top:54px}
+  @media(max-width:860px){.steps{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.steps{grid-template-columns:1fr;max-width:360px;margin:54px auto 0}}
+  .step .n{font-family:var(--serif);font-size:15px;letter-spacing:.2em;color:var(--cortica);padding-bottom:14px;border-bottom:1px solid rgba(176,122,82,.4);margin-bottom:18px}
+  .step h4{font-family:var(--serif);font-size:22px;font-weight:500;margin-bottom:8px}
+  .step p{font-size:13.5px;color:var(--tinta);font-weight:300;line-height:1.8}
+  .origem{background:var(--espresso);color:var(--creme);padding:120px 0;text-align:center}
+  .origem .ic{height:56px;width:auto;margin:0 auto 26px;display:block}
+  .origem h2{font-size:clamp(30px,4.2vw,48px);color:var(--creme);max-width:760px;margin:0 auto}
+  .origem h2 em{font-style:italic;color:var(--cortica)}
+  .origem p{max-width:560px;margin:24px auto 0;color:var(--pedra);font-weight:300;font-size:16px;line-height:1.9}
+  .origem .btn{margin-top:38px}
+  footer{padding:64px 0 40px;background:var(--creme)}
+  .ftop{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:30px;padding-bottom:34px;border-bottom:1px solid rgba(32,30,24,.12)}
+  .ftop .w{font-family:var(--serif);font-size:30px;letter-spacing:.3em;font-weight:500}
+  .ftop .tag{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--verde);margin-top:6px}
+  .fcols{display:flex;gap:56px;flex-wrap:wrap}
+  .fcols a{display:block;font-size:13px;color:var(--tinta);text-decoration:none;opacity:.8;margin:7px 0;transition:opacity .3s}
+  .fcols a:hover{opacity:1}
+  .fcols .ttl{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--cortica);margin-bottom:6px}
+  .fbot{margin-top:26px;font-size:11px;letter-spacing:.08em;color:var(--pedra)}
+</style></head><body>
+<nav><div class="wrap nav">
+  <div class="brandmark"><img src="./bull.webp" alt=""><span class="w">MONTADO</span></div>
+  <div class="navlinks">
+    <a class="lk" href="#diag">Os Cortes</a><a class="lk" href="#formatos">Formatos</a>
+    <a class="lk" href="#como">Como Funciona</a><a class="lk" href="#origem">Origem</a>
+    <a class="btn ghost" href="#formatos">Pré-encomendar</a>
+  </div>
+</div></nav>
+<header class="hero"><div class="wrap">
+  <img class="logo rv" src="./logo.webp" alt="MONTADO — do pasto ao prato">
+  <h1 class="rv" style="transition-delay:.08s">Compra melhor.<br><em>Desperdiça nada.</em></h1>
+  <p class="lead rv" style="transition-delay:.16s">Carne do Alentejo vendida por fração do animal — um quarto, meia ou inteira — entregue já desmanchada, embalada e pronta a congelar. Melhor preço por quilo, com a transparência de quem conhece a origem de cada peça.</p>
+  <div class="ctas rv" style="transition-delay:.24s"><a class="btn" href="#formatos">Ver formatos &amp; preços</a><a class="btn ghost" href="#diag">Conhecer os cortes</a></div>
+  <div class="scroll-cue rv" style="transition-delay:.32s">Desça<span></span></div>
+</div></header>
+<section class="wrap"><div class="pills rv">
+  <div class="pill"><b>3</b><small>Produtores · Alentejo</small></div>
+  <div class="pill"><b>~270kg</b><small>Carne por animal inteiro</small></div>
+  <div class="pill"><b>0</b><small>Desperdício comercial</small></div>
+  <div class="pill"><b>100%</b><small>Pré-venda calendarizada</small></div>
+</div></section>
+<section class="diag" id="diag"><div class="wrap">
+  <div class="head rv"><div class="label">O animal inteiro</div>
+    <h2>Conhece cada corte<br>antes de o receberes</h2>
+    <p>Não vendemos cortes avulsos — vendemos abastecimento planeado. Cada fração chega equilibrada entre cortes nobres, de assar, de estufar e picado. Passa o rato sobre o animal para conheceres cada peça.</p></div>
+  <div class="poster rv" style="transition-delay:.1s">
+    <figure>
+      <img src="./diagram.webp" alt="Diagrama de cortes de bovino MONTADO">
+      <svg class="ov" viewBox="0 0 799 496" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <defs><clipPath id="cow"><path d="M278.0,480.5 L269.0,480.5 L256.0,477.5 L251.5,473.0 L263.5,436.0 L262.5,365.0 L257.5,335.0 L251.5,320.0 L235.0,308.5 L225.5,299.0 L199.5,260.0 L177.0,236.5 L165.0,228.5 L150.0,213.5 L129.0,213.5 L105.0,204.5 L84.0,191.5 L56.0,184.5 L28.0,183.5 L20.5,177.0 L11.5,151.0 L10.5,134.0 L12.5,130.0 L23.0,120.5 L40.0,112.5 L56.0,102.5 L73.5,85.0 L73.5,80.0 L69.0,74.5 L44.0,63.5 L33.5,54.0 L29.5,44.0 L29.5,35.0 L33.0,30.5 L37.0,30.5 L40.5,36.0 L49.0,43.5 L64.0,49.5 L71.0,50.5 L73.5,48.0 L63.5,39.0 L59.5,29.0 L60.5,17.0 L65.0,11.5 L68.0,11.5 L71.5,15.0 L73.5,23.0 L83.0,30.5 L121.0,40.5 L128.0,44.5 L134.0,50.5 L146.0,50.5 L157.0,39.5 L166.0,34.5 L184.0,29.5 L199.0,28.5 L202.5,32.0 L199.5,45.0 L194.5,53.0 L184.5,62.0 L187.0,64.5 L196.0,66.5 L206.0,71.5 L234.0,76.5 L254.0,75.5 L310.0,57.5 L330.0,57.5 L403.0,62.5 L462.0,62.5 L483.0,64.5 L564.0,62.5 L656.0,63.5 L670.0,61.5 L718.0,60.5 L733.0,63.5 L744.5,72.0 L753.5,88.0 L757.5,108.0 L754.5,148.0 L754.5,187.0 L756.5,212.0 L756.5,275.0 L760.5,291.0 L761.5,307.0 L759.5,317.0 L755.5,326.0 L748.5,336.0 L744.0,339.5 L738.5,330.0 L735.5,318.0 L736.5,307.0 L743.5,284.0 L743.5,239.0 L740.5,171.0 L737.5,139.0 L735.5,134.0 L730.0,128.5 L727.5,131.0 L728.5,207.0 L726.5,239.0 L719.5,275.0 L711.5,296.0 L709.5,306.0 L713.5,318.0 L715.5,331.0 L714.5,352.0 L709.5,371.0 L708.5,400.0 L708.5,410.0 L712.5,428.0 L712.5,440.0 L706.5,446.0 L703.5,452.0 L702.5,469.0 L699.0,474.5 L693.0,476.5 L681.0,476.5 L669.0,473.5 L664.5,469.0 L664.5,459.0 L670.5,439.0 L669.5,411.0 L663.5,394.0 L650.0,369.5 L647.5,372.0 L642.5,391.0 L645.5,438.0 L636.5,446.0 L635.5,457.0 L633.5,462.0 L630.0,465.5 L623.0,467.5 L608.0,467.5 L600.0,465.5 L594.5,461.0 L594.5,452.0 L603.5,426.0 L601.5,378.0 L595.5,349.0 L582.5,319.0 L580.0,316.5 L562.0,318.5 L545.0,325.5 L534.0,325.5 L513.0,314.5 L469.0,313.5 L424.0,309.5 L389.0,304.5 L372.0,304.5 L369.5,307.0 L369.5,323.0 L366.5,343.0 L368.5,414.0 L371.5,438.0 L363.5,448.0 L360.5,461.0 L357.0,464.5 L352.0,466.5 L333.0,467.5 L324.0,464.5 L320.5,460.0 L323.5,442.0 L330.5,427.0 L330.5,412.0 L323.5,361.0 L320.5,352.0 L317.0,348.5 L313.5,353.0 L308.5,367.0 L302.5,394.0 L301.5,431.0 L304.5,445.0 L304.5,455.0 L295.5,463.0 L292.5,473.0 L287.0,478.5 L278.0,480.5 Z"/></clipPath></defs>
+        <g clip-path="url(#cow)">
+        <polygon class="cut" data-n="Língua" data-s="Cabeça" points="12,150 50,148 95,160 96,185 70,205 35,200 12,178"/>
+        <polygon class="cut" data-n="Bochecha" data-s="Cabeça" points="86,112 118,104 150,116 155,148 142,180 108,186 86,165 80,138"/>
+        <polygon class="cut" data-n="Cachaço" data-s="Dianteiro" points="78,96 110,72 158,64 198,70 206,98 160,104 150,102 120,104 92,114"/>
+        <polygon class="cut" data-n="Pescoço" data-s="Dianteiro" points="158,98 206,98 214,155 202,210 150,212 140,168 146,124"/>
+        <polygon class="cut" data-n="Acém Comprido" data-s="Dianteiro" points="206,98 226,72 322,68 326,98 322,156 208,158 200,128"/>
+        <polygon class="cut" data-n="Acém Redondo" data-s="Dianteiro" points="208,158 322,156 322,200 210,205 204,180"/>
+        <polygon class="cut" data-n="Aba de Chuva" data-s="Dianteiro" points="210,205 322,200 322,236 212,240 206,222"/>
+        <polygon class="cut" data-n="Costelão" data-s="Costelas" points="326,68 444,72 452,150 330,150 326,98"/>
+        <polygon class="cut" data-n="Cortes de Costela" data-s="Costelas" points="330,150 452,150 456,236 330,236"/>
+        <polygon class="cut" data-n="Peito · Aba Delgada" data-s="Peito" points="212,240 322,236 320,308 214,306 206,272"/>
+        <polygon class="cut" data-n="Peito · Aba Delgada" data-s="Peito" points="322,236 445,236 450,308 320,308"/>
+        <polygon class="cut" data-n="Vazia" data-s="Lombo" points="455,66 560,64 560,114 458,116 450,90"/>
+        <polygon class="cut" data-n="Vazia Baixa" data-s="Lombo" points="560,64 644,66 648,116 560,114"/>
+        <polygon class="cut" data-n="Cabeça do Lombo" data-s="Lombo" points="455,116 558,114 558,205 456,205 450,150"/>
+        <polygon class="cut" data-n="Coração do Lombo" data-s="Lombo" points="456,205 558,205 556,250 452,250"/>
+        <polygon class="cut" data-n="Pontas do Lombo" data-s="Lombo" points="560,114 648,116 650,200 560,200"/>
+        <polygon class="cut" data-n="Pontas do Lombo" data-s="Lombo" points="560,200 650,200 650,300 558,300 558,205"/>
+        <polygon class="cut" data-n="Aba · Aba Grossa" data-s="Aba" points="450,250 556,250 558,308 450,310 445,280"/>
+        <polygon class="cut" data-n="Alcatra" data-s="Traseiro" points="648,75 708,78 712,150 650,150 646,110"/>
+        <polygon class="cut" data-n="Rabada" data-s="Traseiro" points="700,66 762,84 760,150 708,150 702,100"/>
+        <polygon class="cut" data-n="Pojadouro" data-s="Traseiro" points="650,150 742,150 742,206 650,206"/>
+        <polygon class="cut" data-n="Pato do Pojadouro" data-s="Traseiro" points="648,206 742,206 740,258 648,258"/>
+        <polygon class="cut" data-n="Flanco do Pojadouro" data-s="Traseiro" points="640,258 728,258 724,312 636,312 636,280"/>
+        <polygon class="cut" data-n="Chambão" data-s="Perna" points="210,302 322,302 322,360 305,455 295,472 270,472 264,396 250,396 244,472 218,472 210,455 206,360"/>
+        <polygon class="cut" data-n="Chambão de Trás" data-s="Perna" points="620,300 716,300 716,360 706,455 696,472 672,472 666,396 650,396 644,472 622,472 616,360"/>
+        <ellipse class="cut" data-n="Lombo" data-s="Lombo" cx="558" cy="154" rx="100" ry="30"/>
+        </g>
+      </svg>
+    </figure>
+    <div class="diagcap" id="diagcap"><span class="dot"></span><span class="idle">Passa o rato sobre uma peça</span></div>
+    <div class="diaghint">Cabeça · Dianteiro · Costelas · Lombo · Aba · Traseiro · Perna</div>
+  </div>
+</div></section>
+<section class="formatos" id="formatos"><div class="wrap">
+  <div class="sec-head rv"><div class="label">Escolhe a tua fração</div><h2>Três formatos, um só animal</h2>
+    <p>Preço por quilo sobre peso final embalado — sem ambiguidades. Quanto maior a fração, melhor o preço por quilo.</p></div>
+  <div class="cards">
+    <div class="card rv"><div class="tag">Família</div><div class="frac">¼</div><h3>Quarto de bovino</h3>
+      <p class="desc">Ideal para um casal ou família pequena. Stock para várias semanas, sem encher o congelador.</p>
+      <div class="meta"><div class="row"><span>Peso final</span><b>67,5 kg</b></div><div class="row"><span>Preço / kg</span><b>13,90 €</b></div></div>
+      <div class="price">desde ~938 € por encomenda</div></div>
+    <div class="card feat rv" style="transition-delay:.08s"><div class="tag">Mais escolhido</div><div class="frac">½</div><h3>Meia bovino</h3>
+      <p class="desc">O equilíbrio perfeito entre preço por quilo e capacidade de congelação para uma família.</p>
+      <div class="meta"><div class="row"><span>Peso final</span><b>135 kg</b></div><div class="row"><span>Preço / kg</span><b>12,90 €</b></div></div>
+      <div class="price">desde ~1.742 € por encomenda</div></div>
+    <div class="card rv" style="transition-delay:.16s"><div class="tag">Compra coletiva</div><div class="frac">1</div><h3>Bovino inteiro</h3>
+      <p class="desc">O melhor preço por quilo. Para famílias grandes, grupos de compra ou pequena restauração.</p>
+      <div class="meta"><div class="row"><span>Peso final</span><b>270 kg</b></div><div class="row"><span>Preço / kg</span><b>11,90 €</b></div></div>
+      <div class="price">desde ~3.213 € por encomenda</div></div>
+  </div>
+  <p class="foot rv">Pesos e valores indicativos sobre peso final embalado. Transporte refrigerado cotado à parte consoante o código postal.</p>
+</div></section>
+<section class="como" id="como"><div class="wrap">
+  <div class="sec-head rv"><div class="label">Sem stock parado, sem surpresas</div><h2>Como funciona a pré-venda</h2></div>
+  <div class="steps">
+    <div class="step rv"><div class="n">01</div><h4>Reservas</h4><p>Escolhes a fração e a janela de entrega, e pagas um sinal. Só abatemos quando o lote está reservado.</p></div>
+    <div class="step rv" style="transition-delay:.08s"><div class="n">02</div><h4>Abate calendarizado</h4><p>O animal é abatido em matadouro licenciado, no Alentejo, com rastreabilidade por lote e por animal.</p></div>
+    <div class="step rv" style="transition-delay:.16s"><div class="n">03</div><h4>Desmancha &amp; embalagem</h4><p>Desmanchado e embalado a vácuo, corte a corte, etiquetado com peso, lote e conservação.</p></div>
+    <div class="step rv" style="transition-delay:.24s"><div class="n">04</div><h4>Entrega refrigerada</h4><p>Chega a casa em cadeia de frio, pronto a congelar, com guia de cortes e sugestões de utilização.</p></div>
+  </div>
+</div></section>
+<section class="origem" id="origem"><div class="wrap">
+  <img class="ic" src="./bull-light.webp" alt="">
+  <div class="label" style="color:var(--cortica)">Alentejo · Portugal</div>
+  <h2>Nascida no montado,<br>onde o gado pasta <em>em liberdade</em></h2>
+  <p>Trabalhamos com três produtores em regime extensivo. Conhecemos cada herdade, cada animal e cada peça que entregamos. É esta a serenidade de uma marca premium com a honestidade do produtor.</p>
+  <a class="btn cream" href="#formatos">Quero reservar a minha fração</a>
+</div></section>
+<footer><div class="wrap">
+  <div class="ftop">
+    <div><div class="brandmark"><img src="./bull.webp" alt="" style="height:30px"><span class="w">MONTADO</span></div>
+      <div class="tag" style="margin-top:10px">Do pasto ao prato</div></div>
+    <div class="fcols">
+      <div><div class="ttl">Produto</div><a href="#formatos">Quarto</a><a href="#formatos">Meia</a><a href="#formatos">Inteiro</a></div>
+      <div><div class="ttl">Marca</div><a href="#origem">Origem</a><a href="#diag">Os cortes</a><a href="#como">Pré-venda</a></div>
+      <div><div class="ttl">Apoio</div><a href="#">Entregas</a><a href="#">Rastreabilidade</a><a href="#">Contacto</a></div>
+    </div>
+  </div>
+  <div class="fbot">© 2026 MONTADO · Alentejo, Portugal — Carne de origem, vendida por fração, entregue em cortes.</div>
+</div></footer>
+<script>
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+  document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+  const cap=document.getElementById('diagcap');
+  const idle='<span class="dot"></span><span class="idle">Passa o rato sobre uma peça</span>';
+  document.querySelectorAll('.cut').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{cap.classList.add('on');cap.innerHTML='<span class="dot"></span><span><span class="nm">'+el.dataset.n+'</span><span class="sb">'+el.dataset.s+'</span></span>';});
+    el.addEventListener('mouseleave',()=>{cap.classList.remove('on');cap.innerHTML=idle;});
+  });
+</script>
+</body></html>
